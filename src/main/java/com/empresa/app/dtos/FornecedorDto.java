@@ -40,8 +40,8 @@ public class FornecedorDto {
     }
 
     public FornecedorDto(FornecedorModel fornecedorModel) {
-		BeanUtils.copyProperties(fornecedorModel, this);
-	}
+        BeanUtils.copyProperties(fornecedorModel, this);
+    }
 
     public UUID getId() {
         return id;
