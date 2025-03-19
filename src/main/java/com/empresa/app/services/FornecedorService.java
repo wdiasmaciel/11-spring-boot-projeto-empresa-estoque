@@ -1,3 +1,12 @@
+/**
+ * Documentação no Swagger: 
+ * 1) http://localhost:8080/swagger-ui/index.html 
+ * ou 
+ * 2) http://localhost:8080/swagger-ui.html
+ * 
+ * Console do Banco de Dados em Memória H2:
+ * 1) http://localhost:8080/h2-console
+ */
 package com.empresa.app.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
