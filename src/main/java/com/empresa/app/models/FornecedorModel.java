@@ -1,8 +1,9 @@
-package com.empresa.app.model;
+package com.empresa.app.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
@@ -55,5 +56,20 @@ public class FornecedorModel {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        FornecedorModel that = (FornecedorModel) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
