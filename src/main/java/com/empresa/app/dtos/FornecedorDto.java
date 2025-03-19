@@ -1,0 +1,81 @@
+package com.empresa.app.dtos;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
+import java.util.UUID;
+
+import org.springframework.beans.BeanUtils;
+
+import com.empresa.app.models.FornecedorModel;
+
+public class FornecedorDto {
+
+    /*
+     * Quando um fornecedor é criado, o ID é gerado automaticamente.
+     * Quando um fornecedor é lido, atualizado ou excluído, o ID é
+     * enviado na requisição para identificar o fornecedor.
+     */
+    private UUID id;
+
+    @NotNull
+    @NotBlank
+    private String nome;
+
+    @NotNull
+    @NotBlank
+    private String telefone;
+
+    @NotNull
+    @NotBlank
+    private String endereco;
+
+    public FornecedorDto() {
+    }
+
+    public FornecedorDto(UUID id, String nome, String telefone, String endereco) {
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.endereco = endereco;
+    }
+
+    public FornecedorDto(FornecedorModel fornecedorModel) {
+		BeanUtils.copyProperties(fornecedorModel, this);
+	}
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public FornecedorModel toModel() {
+        return new FornecedorModel(getNome(), getTelefone(), getEndereco());
+    }
+}

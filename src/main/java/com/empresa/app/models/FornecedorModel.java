@@ -1,12 +1,15 @@
 package com.empresa.app.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.validation.constraints.NotNull;
-import jakarta.persistence.GeneratedValue;
 import java.util.Objects;
 import java.util.UUID;
+
+import com.empresa.app.dtos.FornecedorDto;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class FornecedorModel {
@@ -65,6 +68,10 @@ public class FornecedorModel {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public FornecedorDto toDto() {
+        return new FornecedorDto(getId(), getNome(), getTelefone(), getEndereco());
     }
 
     @Override

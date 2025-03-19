@@ -1,7 +1,9 @@
 package com.empresa.app.repositories;
 
-import com.empresa.app.model.FornecedorModel;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.empresa.app.models.FornecedorModel;
+
 import java.util.UUID;
 
 public interface FornecedorRepository extends JpaRepository<FornecedorModel, UUID> {
