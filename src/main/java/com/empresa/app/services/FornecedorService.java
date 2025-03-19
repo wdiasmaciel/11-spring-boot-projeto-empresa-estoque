@@ -28,13 +28,14 @@ public class FornecedorService {
     }
 
     @Transactional(readOnly = true)
-    public FornecedorModel findById(UUID id) {
-        return fornecedorRepository.findById(id).orElse(null);
+    public FornecedorDto findById(UUID id) {
+        FornecedorModel fornecedorModel = fornecedorRepository.findById(id).orElse(null);
+        return new FornecedorDto(fornecedorModel);
     }
 
     @Transactional
-    public FornecedorModel save(FornecedorModel fornecedorModel) {
-        return fornecedorRepository.save(fornecedorModel);
+    public FornecedorDto save(FornecedorDto fornecedorDto) {
+        return fornecedorRepository.save(fornecedorDto.toModel()).toDto();
     }
 
     @Transactional
