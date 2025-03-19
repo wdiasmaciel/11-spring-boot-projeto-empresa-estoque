@@ -13,7 +13,6 @@ import jakarta.validation.Valid;
 import com.empresa.app.dtos.FornecedorDto;
 import com.empresa.app.services.FornecedorService;
 
-@CrossOrigin("*") // Para evitar problemas de CORS.
 @RestController
 @RequestMapping(value = "/fornecedores")
 public class FornecedorController {

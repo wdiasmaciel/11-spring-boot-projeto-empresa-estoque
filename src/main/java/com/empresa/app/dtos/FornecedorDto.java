@@ -39,7 +39,9 @@ public class FornecedorDto {
         this.endereco = endereco;
     }
 
-    public FornecedorDto(FornecedorModel fornecedorModel) {
+    public FornecedorDto(FornecedorModel fornecedorModel) throws IllegalArgumentException {
+        if (fornecedorModel == null)
+            throw new IllegalArgumentException("FornecedorModel não pode ser nulo.");
         BeanUtils.copyProperties(fornecedorModel, this);
     }
 

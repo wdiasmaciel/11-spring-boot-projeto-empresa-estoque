@@ -30,6 +30,11 @@ public class FornecedorService {
     @Transactional(readOnly = true)
     public FornecedorDto findById(UUID id) {
         FornecedorModel fornecedorModel = fornecedorRepository.findById(id).orElse(null);
+        
+        if(fornecedorModel == null) {
+            return null;
+        }
+        
         return new FornecedorDto(fornecedorModel);
     }
 
