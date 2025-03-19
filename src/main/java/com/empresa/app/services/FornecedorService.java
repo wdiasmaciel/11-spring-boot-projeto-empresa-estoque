@@ -39,6 +39,18 @@ public class FornecedorService {
     }
 
     @Transactional
+    public FornecedorDto update(UUID id, FornecedorDto fornecedorDtoAtualizado) {
+        FornecedorDto fornecedorDtoExistente = findById(id);
+        if (fornecedorDtoExistente != null) {
+            fornecedorDtoExistente.setNome(fornecedorDtoAtualizado.getNome());
+            fornecedorDtoExistente.setTelefone(fornecedorDtoAtualizado.getTelefone());
+            fornecedorDtoExistente.setEndereco(fornecedorDtoAtualizado.getEndereco());
+            return save(fornecedorDtoExistente);
+        }
+        return null;
+    }
+    
+    @Transactional
     public void delete(UUID id) {
         fornecedorRepository.deleteById(id);
     }

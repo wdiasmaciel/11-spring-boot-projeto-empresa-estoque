@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
-
+import jakarta.validation.Valid;
 import com.empresa.app.dtos.FornecedorDto;
 import com.empresa.app.services.FornecedorService;
 
@@ -23,8 +23,7 @@ public class FornecedorController {
 
     @GetMapping
     public List<FornecedorDto> findAll() {
-        List<FornecedorDto> listaFornecedorDto = fornecedorService.findAll();
-        return listaFornecedorDto;
+        return fornecedorService.findAll();
     }
 
     @GetMapping(value = "/{id}")
@@ -33,20 +32,13 @@ public class FornecedorController {
     }
 
     @PostMapping
-    public FornecedorDto create(@RequestBody FornecedorDto fornecedorDto) {
+    public FornecedorDto create(@RequestBody @Valid FornecedorDto fornecedorDto) {
         return fornecedorService.save(fornecedorDto);
     }
 
     @PutMapping("/{id}")
-    public FornecedorDto update(@PathVariable UUID id, @RequestBody FornecedorDto fornecedorDtoAtualizado) {
-        FornecedorDto fornecedorDtoExistente = fornecedorService.findById(id);
-        if (fornecedorDtoExistente != null) {
-            fornecedorDtoExistente.setNome(fornecedorDtoAtualizado.getNome());
-            fornecedorDtoExistente.setTelefone(fornecedorDtoAtualizado.getTelefone());
-            fornecedorDtoExistente.setEndereco(fornecedorDtoAtualizado.getEndereco());
-            return fornecedorService.save(fornecedorDtoExistente);
-        }
-        return null;
+    public FornecedorDto update(@PathVariable UUID id, @RequestBody @Valid FornecedorDto fornecedorDtoAtualizado) {
+        return fornecedorService.update(id, fornecedorDtoAtualizado);
     }
 
     @DeleteMapping("/{id}")
