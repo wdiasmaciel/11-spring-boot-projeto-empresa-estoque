@@ -1,7 +1,9 @@
 package com.empresa.app.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.GeneratedValue;
 import java.util.Objects;
 import java.util.UUID;
@@ -13,8 +15,15 @@ public class FornecedorModel {
     @GeneratedValue(generator = "UUID")
     private UUID id;
 
+    @NotNull
+    @Column(unique = true)
     private String nome;
+
+    @NotNull
+    @Column(unique = true)
     private String telefone;
+
+    @NotNull
     private String endereco;
 
     public FornecedorModel() {
