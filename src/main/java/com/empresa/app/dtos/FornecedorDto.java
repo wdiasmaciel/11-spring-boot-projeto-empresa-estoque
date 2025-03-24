@@ -78,6 +78,9 @@ public class FornecedorDto {
     }
 
     public FornecedorModel toModel() {
-        return new FornecedorModel(getNome(), getTelefone(), getEndereco());
+        if (id == null) {
+            return new FornecedorModel(getNome(), getTelefone(), getEndereco());
+        }
+        return new FornecedorModel(this);
     }
 }
