@@ -5,13 +5,15 @@ import java.util.UUID;
 
 import com.empresa.app.dtos.FornecedorDto;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "fornecedor")
 public class FornecedorModel {
 
     @Id
