@@ -38,6 +38,27 @@ public class FornecedorModel {
         this.endereco = endereco;
     }
 
+    public FornecedorModel(UUID id, String nome, String telefone, String endereco) {
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.endereco = endereco;
+    }
+
+    public FornecedorModel(FornecedorDto fornecedorDto) throws IllegalArgumentException {
+        if (fornecedorDto == null) {
+            throw new IllegalArgumentException("FornecedorDto não pode ser nulo.");
+        }
+
+        if(fornecedorDto.getId() != null) {
+            this.id = fornecedorDto.getId();
+        }
+
+        this.nome = fornecedorDto.getNome();
+        this.telefone = fornecedorDto.getTelefone();
+        this.endereco = fornecedorDto.getEndereco();
+    }
+
     public UUID getId() {
         return id;
     }
