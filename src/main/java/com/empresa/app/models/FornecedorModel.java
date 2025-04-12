@@ -1,38 +1,41 @@
 package com.empresa.app.models;
 
-import java.util.Objects;
-import java.util.UUID;
-
-import com.empresa.app.dtos.FornecedorDto;
-
+import com.empresa.app.dtos.FornecedorRequestDto;
+import com.empresa.app.dtos.FornecedorResponseDto;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.beans.BeanUtils;
+import lombok.*;
+
+import java.util.UUID;
 
 @Entity
 @Table(name = "fornecedor")
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class FornecedorModel {
 
     @Id
     @GeneratedValue(generator = "UUID")
-    private UUID id;
+    @EqualsAndHashCode.Include
+    @Getter private UUID id;
 
     @NotNull
     @Column(unique = true)
-    private String nome;
+    @Getter @Setter private String nome;
 
     @NotNull
     @Column(unique = true)
-    private String telefone;
+    @Getter @Setter private String telefone;
 
     @NotNull
-    private String endereco;
-
-    public FornecedorModel() {
-    }
+    @Getter @Setter private String endereco;
 
     public FornecedorModel(String nome, String telefone, String endereco) {
         this.nome = nome;
@@ -40,75 +43,30 @@ public class FornecedorModel {
         this.endereco = endereco;
     }
 
-    public FornecedorModel(UUID id, String nome, String telefone, String endereco) {
-        this.id = id;
-        this.nome = nome;
-        this.telefone = telefone;
-        this.endereco = endereco;
+    public FornecedorModel(FornecedorRequestDto fornecedorRequestDto) throws IllegalArgumentException {
+        if (fornecedorRequestDto == null)
+            throw new IllegalArgumentException("FornecedorRequestDto não pode ser nulo.");
+
+        this.nome = fornecedorRequestDto.getNome();
+        this.telefone = fornecedorRequestDto.getTelefone();
+        this.endereco = fornecedorRequestDto.getEndereco();
     }
 
-    public FornecedorModel(FornecedorDto fornecedorDto) throws IllegalArgumentException {
-        if (fornecedorDto == null) {
-            throw new IllegalArgumentException("FornecedorDto não pode ser nulo.");
-        }
+    public FornecedorModel(FornecedorResponseDto fornecedorResponseDto) throws IllegalArgumentException {
+        if (fornecedorResponseDto == null) 
+            throw new IllegalArgumentException("FornecedorRequestDto não pode ser nulo.");
 
-        if(fornecedorDto.getId() != null) {
-            this.id = fornecedorDto.getId();
-        }
+        if (fornecedorResponseDto.getId() == null) 
+            throw new IllegalArgumentException("FornecedorResponseDto nõa pote ter ID nulo.");
 
-        this.nome = fornecedorDto.getNome();
-        this.telefone = fornecedorDto.getTelefone();
-        this.endereco = fornecedorDto.getEndereco();
+            BeanUtils.copyProperties(this, fornecedorResponseDto);
     }
 
-    public UUID getId() {
-        return id;
+    public FornecedorRequestDto toRequestDto() {
+        return new FornecedorRequestDto(getNome(), getTelefone(), getEndereco());
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public FornecedorDto toDto() {
-        return new FornecedorDto(getId(), getNome(), getTelefone(), getEndereco());
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        FornecedorModel that = (FornecedorModel) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public FornecedorResponseDto toResponseDto() {
+        return new FornecedorResponseDto(getId(), getNome(), getTelefone(), getEndereco());
     }
 }

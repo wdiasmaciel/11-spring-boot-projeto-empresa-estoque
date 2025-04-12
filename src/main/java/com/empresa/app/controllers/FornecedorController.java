@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
-import com.empresa.app.dtos.FornecedorDto;
+import com.empresa.app.dtos.FornecedorRequestDto;
+import com.empresa.app.dtos.FornecedorResponseDto;
 import com.empresa.app.services.FornecedorService;
 
 @RestController
@@ -21,23 +22,23 @@ public class FornecedorController {
     private FornecedorService fornecedorService;
 
     @GetMapping
-    public List<FornecedorDto> findAll() {
+    public List<FornecedorResponseDto> findAll() {
         return fornecedorService.findAll();
     }
 
     @GetMapping(value = "/{id}")
-    public FornecedorDto findById(@PathVariable UUID id) {
+    public FornecedorResponseDto findById(@PathVariable UUID id) {
         return fornecedorService.findById(id);
     }
 
     @PostMapping
-    public FornecedorDto create(@RequestBody @Valid FornecedorDto fornecedorDto) {
-        return fornecedorService.save(fornecedorDto);
+    public FornecedorResponseDto create(@RequestBody @Valid FornecedorRequestDto fornecedorRequestDto) {
+        return fornecedorService.save(fornecedorRequestDto);
     }
 
     @PutMapping("/{id}")
-    public FornecedorDto update(@PathVariable UUID id, @RequestBody @Valid FornecedorDto fornecedorDtoAtualizado) {
-        return fornecedorService.update(id, fornecedorDtoAtualizado);
+    public FornecedorResponseDto update(@PathVariable UUID id, @RequestBody @Valid FornecedorRequestDto fornecedorRequestDtoComAtualizacao) {
+        return fornecedorService.update(id, fornecedorRequestDtoComAtualizacao);
     }
 
     @DeleteMapping("/{id}")
