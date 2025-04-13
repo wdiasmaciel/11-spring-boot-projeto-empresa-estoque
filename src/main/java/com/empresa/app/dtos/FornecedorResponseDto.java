@@ -1,13 +1,10 @@
 package com.empresa.app.dtos;
 
-import com.empresa.app.models.FornecedorModel;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.UUID;
-import org.springframework.beans.BeanUtils;
 
 @Getter
 @Setter
@@ -36,20 +33,4 @@ public class FornecedorResponseDto {
     @NotNull
     @NotBlank
     private String endereco;
-
-    public FornecedorResponseDto(FornecedorModel fornecedorModel) {
-        if (fornecedorModel == null)
-            throw new IllegalArgumentException("FornecedorModel não pode ser nulo.");
-        if (fornecedorModel.getId() == null)
-            throw new IllegalArgumentException("ForenecedorModel nõa pote ter ID nulo.");
-
-        BeanUtils.copyProperties(fornecedorModel, this);
-    }
-
-    public FornecedorModel toModel() {
-        if (id == null) 
-            return new FornecedorModel(getNome(), getTelefone(), getEndereco());
-        
-        return new FornecedorModel(this);
-    }
 }

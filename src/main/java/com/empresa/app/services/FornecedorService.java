@@ -10,6 +10,7 @@ import java.util.UUID;
 import com.empresa.app.dtos.FornecedorRequestDto;
 import com.empresa.app.dtos.FornecedorResponseDto;
 import com.empresa.app.models.FornecedorModel;
+import com.empresa.app.mappers.FornecedorMapper;
 import com.empresa.app.repositories.FornecedorRepository;
 
 @Service
@@ -25,29 +26,33 @@ public class FornecedorService {
     @Transactional(readOnly = true)
     public List<FornecedorResponseDto> findAll() {
         List<FornecedorModel> listaFornecedorModel = fornecedorRepository.findAll();
-        return listaFornecedorModel.stream().map(FornecedorResponseDto::new).toList();
+        return listaFornecedorModel.stream()
+                .map(FornecedorMapper::toResponseDto) // Converte cada FornecedorModel para FornecedorResponseDto. FornecedorMapper::toResponseDto é uma "method reference".
+                .toList();
     }
 
     @Transactional(readOnly = true)
     public FornecedorResponseDto findById(UUID id) {
         FornecedorModel fornecedorModel = fornecedorRepository.findById(id).orElse(null);
-        
-        if(fornecedorModel == null)
+
+        if (fornecedorModel == null)
             return null;
-        
-        return new FornecedorResponseDto(fornecedorModel);
+
+        return FornecedorMapper.toResponseDto(fornecedorModel);
     }
 
     @Transactional
     public FornecedorResponseDto save(FornecedorRequestDto fornecedorRequestDto) {
-        return fornecedorRepository.save(fornecedorRequestDto.toModel()).toResponseDto();
+        FornecedorModel fornecedorModel = fornecedorRepository.save(FornecedorMapper.toModel(fornecedorRequestDto));
+        return FornecedorMapper.toResponseDto(fornecedorModel);
     }
 
     @Transactional
     public FornecedorResponseDto save(FornecedorResponseDto fornecedorResponseDto) {
-        return fornecedorRepository.save(fornecedorResponseDto.toModel()).toResponseDto();
+        FornecedorModel fornecedorModel = fornecedorRepository.save(FornecedorMapper.toModel(fornecedorResponseDto));
+        return FornecedorMapper.toResponseDto(fornecedorModel);
     }
-    
+
     @Transactional
     public FornecedorResponseDto update(UUID id, FornecedorRequestDto fornecedorRequestDtoComAtualizacao) {
         FornecedorResponseDto fornecedorResponseDtoExistente = findById(id);
@@ -59,7 +64,7 @@ public class FornecedorService {
         }
         return null;
     }
-    
+
     @Transactional
     public void delete(UUID id) {
         fornecedorRepository.deleteById(id);
