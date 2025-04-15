@@ -61,12 +61,4 @@ public class FornecedorModel {
 
             BeanUtils.copyProperties(this, fornecedorResponseDto);
     }
-
-    public FornecedorRequestDto toRequestDto() {
-        return new FornecedorRequestDto(getNome(), getTelefone(), getEndereco());
-    }
-
-    public FornecedorResponseDto toResponseDto() {
-        return new FornecedorResponseDto(getId(), getNome(), getTelefone(), getEndereco());
-    }
 }
