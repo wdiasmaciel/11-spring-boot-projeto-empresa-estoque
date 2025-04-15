@@ -26,18 +26,17 @@ public class FilialService {
     public List<FilialDto> findAll() {
         List<FilialModel> listaFilialModel = filialRepository.findAll();
         return listaFilialModel.stream()
-                .map(FilialMapper::toDto) // Converte cada FilialModel para FilialResponseDto. FilialMapper::toDto é uma "method reference".
+                .map(FilialMapper::toDto) // Converte cada FilialModel para FilialResponseDto. 
+                                          // FilialMapper::toDto é uma "method reference".
                 .toList();
     }
 
     @Transactional(readOnly = true)
     public FilialDto findById(String cnpj) {
-        FilialModel filialModel = filialRepository.findById(cnpj).orElse(null);
-
-        if (filialModel == null)
-            return null;
-
-        return FilialMapper.toDto(filialModel);
+        return filialRepository.findById(cnpj) // Retorna um Optional<FilialModel>.
+                .map(FilialMapper::toDto) // Converte o FilialModel para FilialDto apenas se o valor estiver presente.
+                                          // FilialMapper::toDto é uma "method reference".
+                .orElse(null); // Retorna null se o Optional estiver vazio (ou seja, se não encontrou a filial).
     }
 
     @Transactional
