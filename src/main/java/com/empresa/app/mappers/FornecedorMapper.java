@@ -5,7 +5,9 @@ import com.empresa.app.dtos.FornecedorResponseDto;
 import com.empresa.app.models.FornecedorModel;
 import org.springframework.beans.BeanUtils;
 
-public class FornecedorMapper {
+public final class FornecedorMapper {
+    private FornecedorMapper() {
+    } // Construtor privado para evitar instância da classe.
 
     public static FornecedorModel toModel(FornecedorRequestDto dto) {
         if (dto == null)

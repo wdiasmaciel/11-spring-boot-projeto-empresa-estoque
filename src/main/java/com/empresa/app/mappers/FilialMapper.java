@@ -3,8 +3,11 @@ package com.empresa.app.mappers;
 import com.empresa.app.dtos.FilialDto;
 import com.empresa.app.models.FilialModel;
 
-public class FilialMapper {
-
+public final class FilialMapper {
+    private FilialMapper() {
+        // Construtor privado para evitar instância da classe.
+    }   
+    
     public static FilialModel toModel(FilialDto dto) {
         if (dto == null)
             throw new IllegalArgumentException("FilialDto não pode ser nulo.");

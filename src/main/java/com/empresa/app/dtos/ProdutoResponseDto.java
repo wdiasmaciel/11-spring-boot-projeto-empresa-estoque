@@ -2,6 +2,7 @@ package com.empresa.app.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.Valid;
 import lombok.*;
 
 import java.util.UUID;
@@ -10,21 +11,17 @@ import java.util.UUID;
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class FornecedorResponseDto {
+public class ProdutoResponseDto {
 
     @NotNull
     @EqualsAndHashCode.Include
     private UUID id;
 
     @NotNull
+    @Valid // Para validar os campos do objeto fornecedor.
+    private FornecedorResponseDto fornecedorResponseDto;
+
+    @NotNull
     @NotBlank
     private String nome;
-
-    @NotNull
-    @NotBlank
-    private String telefone;
-
-    @NotNull
-    @NotBlank
-    private String endereco;
 }
