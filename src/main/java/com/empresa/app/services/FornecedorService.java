@@ -27,7 +27,8 @@ public class FornecedorService {
     public List<FornecedorResponseDto> findAll() {
         List<FornecedorModel> listaFornecedorModel = fornecedorRepository.findAll();
         return listaFornecedorModel.stream()
-                .map(FornecedorMapper::toResponseDto) // Converte cada FornecedorModel para FornecedorResponseDto. FornecedorMapper::toResponseDto é uma "method reference".
+                .map(FornecedorMapper::toResponseDto) // Converte cada FornecedorModel para FornecedorResponseDto.
+                                                      // FornecedorMapper::toResponseDto é uma "method reference".
                 .toList();
     }
 
@@ -55,12 +56,12 @@ public class FornecedorService {
 
     @Transactional
     public FornecedorResponseDto update(UUID id, FornecedorRequestDto fornecedorRequestDtoComAtualizacao) {
-        FornecedorResponseDto fornecedorResponseDtoExistente = findById(id);
-        if (fornecedorResponseDtoExistente != null) {
-            fornecedorResponseDtoExistente.setNome(fornecedorRequestDtoComAtualizacao.getNome());
-            fornecedorResponseDtoExistente.setTelefone(fornecedorRequestDtoComAtualizacao.getTelefone());
-            fornecedorResponseDtoExistente.setEndereco(fornecedorRequestDtoComAtualizacao.getEndereco());
-            return save(fornecedorResponseDtoExistente);
+        FornecedorModel fornecedorModel = fornecedorRepository.findById(id).orElse(null);
+        if (fornecedorModel != null) {
+            fornecedorModel.setNome(fornecedorRequestDtoComAtualizacao.getNome());
+            fornecedorModel.setTelefone(fornecedorRequestDtoComAtualizacao.getTelefone());
+            fornecedorModel.setEndereco(fornecedorRequestDtoComAtualizacao.getEndereco());
+            return FornecedorMapper.toResponseDto(fornecedorRepository.save(fornecedorModel));
         }
         return null;
     }

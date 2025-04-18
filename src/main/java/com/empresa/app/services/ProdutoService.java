@@ -10,6 +10,7 @@ import java.util.UUID;
 import com.empresa.app.dtos.ProdutoRequestDto;
 import com.empresa.app.dtos.ProdutoResponseDto;
 import com.empresa.app.models.ProdutoModel;
+import com.empresa.app.mappers.FornecedorMapper;
 import com.empresa.app.mappers.ProdutoMapper;
 import com.empresa.app.repositories.ProdutoRepository;
 
@@ -27,7 +28,8 @@ public class ProdutoService {
     public List<ProdutoResponseDto> findAll() {
         List<ProdutoModel> listaProdutoModel = produtoRepository.findAll();
         return listaProdutoModel.stream()
-                .map(ProdutoMapper::toResponseDto) // Converte cada ProdutoModel para ProdutoResponseDto. ProdutoMapper::toResponseDto é uma "method reference".
+                .map(ProdutoMapper::toResponseDto) // Converte cada ProdutoModel para ProdutoResponseDto.
+                                                   // ProdutoMapper::toResponseDto é uma "method reference".
                 .toList();
     }
 
@@ -55,10 +57,11 @@ public class ProdutoService {
 
     @Transactional
     public ProdutoResponseDto update(UUID id, ProdutoRequestDto produtoRequestDtoComAtualizacao) {
-        ProdutoResponseDto produtoResponseDtoExistente = findById(id);
-        if (produtoResponseDtoExistente != null) {
-            produtoResponseDtoExistente.setNome(produtoRequestDtoComAtualizacao.getNome());
-            return save(produtoResponseDtoExistente);
+        ProdutoModel produtoModel = produtoRepository.findById(id).orElse(null);
+        if (produtoModel != null) {
+            produtoModel.setNome(produtoRequestDtoComAtualizacao.getNome());
+            produtoModel.setFornecedorModel(FornecedorMapper.toModel(produtoRequestDtoComAtualizacao.getFornecedorResponseDto()));
+            return ProdutoMapper.toResponseDto(produtoRepository.save(produtoModel));
         }
         return null;
     }

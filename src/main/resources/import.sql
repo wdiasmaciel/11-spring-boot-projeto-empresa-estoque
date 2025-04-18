@@ -6,12 +6,11 @@ INSERT INTO USUARIO (id, nome, email, senha) VALUES ('4', 'Usuario D', 'usuariod
 INSERT INTO USUARIO (id, nome, email, senha) VALUES ('5', 'Usuario E', 'usuarioe@example.com', 'senha202');
 
 -- Inserindo dados na tabela Fornecedor:
-INSERT INTO FORNECEDOR (id, nome, telefone, endereco) VALUES
-('0ce1c77e-8961-4c77-8f12-382346223b8f', 'Fornecedor A', '(011) 9 1111-1111', 'Endereço A'),
-('92a26808-0c96-494e-88b4-e6d8191b0d34', 'Fornecedor B', '(011) 9 2222-2222', 'Endereço B'),
-('8cfc0652-57f5-4e49-ab19-8af8510ce863', 'Fornecedor C', '(021) 9 3333-3333', 'Endereço C'),
-('de046233-374c-457a-b53b-0b5f842baf2f', 'Fornecedor D', '(031) 9 4444-4444', 'Endereço D'),
-('85dcdddc-9e14-4d78-89ce-f809cb608504', 'Fornecedor E', '(031) 9 5555-5555', 'Endereço E');
+INSERT INTO FORNECEDOR (id, nome, telefone, endereco) VALUES ('0ce1c77e-8961-4c77-8f12-382346223b8f', 'Fornecedor A', '(011) 9 1111-1111', 'Endereço A');
+INSERT INTO FORNECEDOR (id, nome, telefone, endereco) VALUES ('92a26808-0c96-494e-88b4-e6d8191b0d34', 'Fornecedor B', '(011) 9 2222-2222', 'Endereço B');
+INSERT INTO FORNECEDOR (id, nome, telefone, endereco) VALUES ('8cfc0652-57f5-4e49-ab19-8af8510ce863', 'Fornecedor C', '(021) 9 3333-3333', 'Endereço C');
+INSERT INTO FORNECEDOR (id, nome, telefone, endereco) VALUES ('de046233-374c-457a-b53b-0b5f842baf2f', 'Fornecedor D', '(031) 9 4444-4444', 'Endereço D');
+INSERT INTO FORNECEDOR (id, nome, telefone, endereco) VALUES ('85dcdddc-9e14-4d78-89ce-f809cb608504', 'Fornecedor E', '(031) 9 5555-5555', 'Endereço E');
 
 -- Inserindo dados na tabela Filial:
 INSERT INTO FILIAL (cnpj, nome, telefone, endereco) VALUES ('11.111.111/0001-01', 'Filial 1', '(011) 9 4441-4441', 'Avenida 1, 100');

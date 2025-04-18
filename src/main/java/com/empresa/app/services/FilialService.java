@@ -37,7 +37,7 @@ public class FilialService {
                 .map(FilialMapper::toDto) // Converte o FilialModel para FilialDto apenas se o valor estiver presente.
                                           // FilialMapper::toDto é uma "method reference".
                 .orElse(null); // Retorna null se o Optional estiver vazio (ou seja, se não encontrou a
-                                     // filial).
+                               // filial).
     }
 
     @Transactional
@@ -48,10 +48,13 @@ public class FilialService {
 
     @Transactional
     public FilialDto update(String cnpj, FilialDto filialDtoComAtualizacao) {
-        FilialDto filialDtoExistente = findById(cnpj);
-        if (filialDtoExistente != null) {
-            BeanUtils.copyProperties(filialDtoComAtualizacao, filialDtoExistente);
-            return save(filialDtoExistente);
+        FilialModel filialModel = filialRepository.findById(cnpj).orElse(null);
+        if (filialModel != null) {
+            // Copia as propriedades de filialDtoComAtualizacao para filialModel, exceto a
+            // propriedade "cnpj". Isso é útil para evitar que o cnpj seja sobrescrito.
+            BeanUtils.copyProperties(filialDtoComAtualizacao, filialModel, "cnpj");
+            // Salva a filialModel atualizada, converte para FilialDto e retorna a FilialDto.
+            return FilialMapper.toDto(filialRepository.save(filialModel));
         }
         return null;
     }
