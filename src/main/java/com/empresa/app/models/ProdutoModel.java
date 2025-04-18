@@ -1,9 +1,5 @@
 package com.empresa.app.models;
 
-import com.empresa.app.dtos.ProdutoRequestDto;
-import com.empresa.app.dtos.ProdutoResponseDto;
-import com.empresa.app.mappers.FornecedorMapper;
-
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,7 +8,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.beans.BeanUtils;
 import lombok.*;
 
 import java.util.UUID;

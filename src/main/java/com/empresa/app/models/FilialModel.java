@@ -1,12 +1,10 @@
 package com.empresa.app.models;
 
-import com.empresa.app.dtos.FilialDto;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.beans.BeanUtils;
 import lombok.*;
 
 @Entity

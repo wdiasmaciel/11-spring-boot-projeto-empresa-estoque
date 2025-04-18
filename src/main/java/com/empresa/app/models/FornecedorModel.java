@@ -1,14 +1,11 @@
 package com.empresa.app.models;
 
-import com.empresa.app.dtos.FornecedorRequestDto;
-import com.empresa.app.dtos.FornecedorResponseDto;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.beans.BeanUtils;
 import lombok.*;
 
 import java.util.UUID;
