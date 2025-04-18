@@ -42,23 +42,4 @@ public class FornecedorModel {
         this.telefone = telefone;
         this.endereco = endereco;
     }
-
-    public FornecedorModel(FornecedorRequestDto fornecedorRequestDto) throws IllegalArgumentException {
-        if (fornecedorRequestDto == null)
-            throw new IllegalArgumentException("FornecedorRequestDto não pode ser nulo.");
-
-        this.nome = fornecedorRequestDto.getNome();
-        this.telefone = fornecedorRequestDto.getTelefone();
-        this.endereco = fornecedorRequestDto.getEndereco();
-    }
-
-    public FornecedorModel(FornecedorResponseDto fornecedorResponseDto) throws IllegalArgumentException {
-        if (fornecedorResponseDto == null) 
-            throw new IllegalArgumentException("FornecedorRequestDto não pode ser nulo.");
-
-        if (fornecedorResponseDto.getId() == null) 
-            throw new IllegalArgumentException("FornecedorResponseDto nõa pote ter ID nulo.");
-
-            BeanUtils.copyProperties(fornecedorResponseDto, this);
-    }
 }

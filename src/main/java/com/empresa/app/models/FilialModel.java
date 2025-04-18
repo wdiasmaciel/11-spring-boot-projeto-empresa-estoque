@@ -33,14 +33,4 @@ public class FilialModel {
 
     @NotNull
     private String endereco;
-
-    public FilialModel(FilialDto filialDto) throws IllegalArgumentException {
-        if (filialDto == null)
-            throw new IllegalArgumentException("FilialDto não pode ser nulo.");
-
-        if (filialDto.getCnpj() == null)
-            throw new IllegalArgumentException("FilialDto não pode ter CNPJ nulo.");
-
-        BeanUtils.copyProperties(filialDto, this);
-    }
 }

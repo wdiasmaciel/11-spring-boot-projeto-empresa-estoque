@@ -48,22 +48,4 @@ public class ProdutoModel {
         this.fornecedorModel = fornecedorModel;
         this.nome = nome;
     }
-
-    public ProdutoModel(ProdutoRequestDto produtoRequestDto) throws IllegalArgumentException {
-        if (produtoRequestDto == null)
-            throw new IllegalArgumentException("ProdutoRequestDto não pode ser nulo.");
-
-        this.fornecedorModel = FornecedorMapper.toModel(produtoRequestDto.getFornecedorResponseDto());
-        this.nome = produtoRequestDto.getNome();
-    }
-
-    public ProdutoModel(ProdutoResponseDto produtoResponseDto) throws IllegalArgumentException {
-        if (produtoResponseDto == null)
-            throw new IllegalArgumentException("ProdutoResponseDto não pode ser nulo.");
-
-        if (produtoResponseDto.getId() == null)
-            throw new IllegalArgumentException("ProdutoResponseDto não pote ter ID nulo.");
-
-        BeanUtils.copyProperties(produtoResponseDto, this);
-    }
 }
