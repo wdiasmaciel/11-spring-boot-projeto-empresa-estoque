@@ -60,7 +60,6 @@ public final class ProdutoMapper {
     public static void updateModelFromDto(ProdutoRequestDto produtoRequestDto, ProdutoModel produtoModel) throws IllegalArgumentException {
         if (produtoRequestDto == null || produtoModel == null)
             throw new IllegalArgumentException("ProdutoRequestDto e ProdutoModel não podem ser nulos.");
-            
         produtoModel.setNome(produtoRequestDto.getNome());
         produtoModel.setFornecedorModel(FornecedorMapper.toModel(produtoRequestDto.getFornecedorResponseDto()));
         // O ID continua o mesmo e não é alterado

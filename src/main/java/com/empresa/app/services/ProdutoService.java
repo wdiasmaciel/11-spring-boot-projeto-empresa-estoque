@@ -10,7 +10,6 @@ import java.util.UUID;
 import com.empresa.app.dtos.ProdutoRequestDto;
 import com.empresa.app.dtos.ProdutoResponseDto;
 import com.empresa.app.models.ProdutoModel;
-import com.empresa.app.mappers.FornecedorMapper;
 import com.empresa.app.mappers.ProdutoMapper;
 import com.empresa.app.repositories.ProdutoRepository;
 
@@ -60,7 +59,6 @@ public class ProdutoService {
         ProdutoModel produtoModel = produtoRepository.findById(id).orElse(null);
         if (produtoModel != null) {
             produtoModel.setNome(produtoRequestDtoComAtualizacao.getNome());
-            produtoModel.setFornecedorModel(FornecedorMapper.toModel(produtoRequestDtoComAtualizacao.getFornecedorResponseDto()));
             return ProdutoMapper.toResponseDto(produtoRepository.save(produtoModel));
         }
         return null;
