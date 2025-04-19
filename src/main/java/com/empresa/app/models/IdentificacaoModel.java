@@ -36,6 +36,27 @@ public class IdentificacaoModel {
      */
     @OneToOne
     @JoinColumn(name = "id_produto")
+    /*
+     * @JoinColumn indica que a coluna id_produto na tabela de Identificacao
+     * é uma chave estrangeira que se refere à coluna id da tabela de Produto.
+     * @JoinColumn é usada para especificar a coluna que será usada para
+     * fazer a junção entre as duas tabelas.
+     * A @JoinColumn é usada para mapear a relação entre as duas entidades.
+     * Nesse caso, a coluna id_produto na tabela Identificacao é uma
+     * chave estrangeira que se refere à coluna id tabela Produto.
+     * A tabela identificacao terá uma coluna chamada id_produto.
+     * 
+     * Essa coluna será uma chave estrangeira referenciando o campo id da tabela 
+     * Produto. Com isso, conseguimos fazer o relacionamento @OneToOne (1:1), 
+     * indicando que cada identificação está associada exatamente a um produto.
+     * Exemplo:
+     * CREATE TABLE identificacao (
+     *     id_produto UUID PRIMARY KEY,
+     *     descricao TEXT NOT NULL,
+     *     observacao TEXT NOT NULL,
+     *     FOREIGN KEY (id_produto) REFERENCES produto(id)
+     * );
+    */
     @Valid
     @EqualsAndHashCode.Include
     private ProdutoModel produtoModel;
@@ -47,4 +68,3 @@ public class IdentificacaoModel {
     @NotNull
     private String observacao;
 }
-
