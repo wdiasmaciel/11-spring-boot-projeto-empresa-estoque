@@ -23,7 +23,7 @@ public class IdentificacaoModel {
 
     @Id
     @EqualsAndHashCode.Include
-    private UUID idProduto;
+    private UUID id;
 
     
     @MapsId

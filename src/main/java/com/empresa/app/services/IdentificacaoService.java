@@ -8,11 +8,8 @@ import java.util.List;
 import java.util.UUID;
 
 import com.empresa.app.dtos.IdentificacaoDto;
-import com.empresa.app.dtos.ProdutoResponseDto;
 import com.empresa.app.models.IdentificacaoModel;
-import com.empresa.app.models.ProdutoModel;
 import com.empresa.app.mappers.IdentificacaoMapper;
-import com.empresa.app.mappers.ProdutoMapper;
 import com.empresa.app.repositories.IdentificacaoRepository;
 
 @Service
@@ -35,19 +32,8 @@ public class IdentificacaoService {
     }
 
     @Transactional(readOnly = true)
-    public IdentificacaoDto findById(ProdutoResponseDto produtoResponseDto) {
-        ProdutoModel produtoModel = ProdutoMapper.toModel(produtoResponseDto);
-        IdentificacaoModel identificacaoModel = identificacaoRepository.findById(produtoModel).orElse(null);
-
-        if (identificacaoModel == null)
-            return null;
-
-        return IdentificacaoMapper.toDto(identificacaoModel);
-    }
-
-    @Transactional(readOnly = true)
     public IdentificacaoDto findById(UUID id) {
-        IdentificacaoModel identificacaoModel = identificacaoRepository.findByProdutoModelId(id).orElse(null);
+        IdentificacaoModel identificacaoModel = identificacaoRepository.findById(id).orElse(null);
 
         if (identificacaoModel == null)
             return null;
@@ -62,36 +48,18 @@ public class IdentificacaoService {
     }
     
     @Transactional
-    public IdentificacaoDto update(ProdutoResponseDto produtoResponseDto, IdentificacaoDto identificacaoDtoComAtualizacao) {
-        ProdutoModel produtoModel = ProdutoMapper.toModel(produtoResponseDto);
-        IdentificacaoModel IdentificacaoModel = identificacaoRepository.findById(produtoModel).orElse(null);
-        if (IdentificacaoModel != null) {
-            IdentificacaoModel.setDescricao(identificacaoDtoComAtualizacao.getDescricao());
-            IdentificacaoModel.setObservacao(identificacaoDtoComAtualizacao.getObservacao());
-            return IdentificacaoMapper.toDto(identificacaoRepository.save(IdentificacaoModel));
-        }
-        return null;
-    }
-    
-    @Transactional
     public IdentificacaoDto update(UUID id, IdentificacaoDto identificacaoDtoComAtualizacao) {
-        IdentificacaoModel IdentificacaoModel = identificacaoRepository.findByProdutoModelId(id).orElse(null);
+        IdentificacaoModel IdentificacaoModel = identificacaoRepository.findById(id).orElse(null);
         if (IdentificacaoModel != null) {
             IdentificacaoModel.setDescricao(identificacaoDtoComAtualizacao.getDescricao());
             IdentificacaoModel.setObservacao(identificacaoDtoComAtualizacao.getObservacao());
             return IdentificacaoMapper.toDto(identificacaoRepository.save(IdentificacaoModel));
         }
         return null;
-    }
-
-
-    @Transactional
-    public void delete(IdentificacaoDto identificacaoDto) {
-        identificacaoRepository.delete(IdentificacaoMapper.toModel(identificacaoDto));
     }
 
     @Transactional
     public void delete(UUID id) {
-        identificacaoRepository.deleteByProdutoModelId(id);
+        identificacaoRepository.deleteById(id);
     }
 }
