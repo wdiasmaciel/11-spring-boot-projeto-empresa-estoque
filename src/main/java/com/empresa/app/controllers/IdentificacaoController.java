@@ -16,6 +16,10 @@ public class IdentificacaoController {
     @Autowired
     private IdentificacaoService identificacaoService;
 
+    public IdentificacaoController(IdentificacaoService identificacaoService) {
+        this.identificacaoService = identificacaoService;
+    }
+
     @GetMapping
     public List<IdentificacaoDto> findAll() {
         return identificacaoService.findAll();
