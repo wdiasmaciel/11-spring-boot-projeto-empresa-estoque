@@ -18,7 +18,7 @@ public class ProdutoResponseDto {
     private UUID id;
 
     @NotNull
-    @Valid // Para validar os campos do objeto fornecedor.
+    @Valid // Para validar os campos do objeto fornecedorResponseDto.
     private FornecedorResponseDto fornecedorResponseDto;
 
     @NotNull

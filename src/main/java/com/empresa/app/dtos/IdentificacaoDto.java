@@ -8,14 +8,17 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProdutoRequestDto {
+public class IdentificacaoDto {
 
     @NotNull
-    @Valid // Para validar os campos do objeto fornecedorResponseDto.
-    private FornecedorResponseDto fornecedorResponseDto;
+    @Valid // Para validar os campos do objeto produtoResponseDto.
+    private ProdutoResponseDto produtoResponseDto;
 
     @NotNull
     @NotBlank
-    private String nome;
+    private String descricao;
 
+    @NotNull
+    @NotBlank
+    private String observacao;
 }

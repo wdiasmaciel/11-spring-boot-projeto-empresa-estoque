@@ -6,6 +6,7 @@ import com.empresa.app.models.FornecedorModel;
 import org.springframework.beans.BeanUtils;
 
 public final class FornecedorMapper {
+    
     private FornecedorMapper() {
     } // Construtor privado para evitar instância da classe.
 
