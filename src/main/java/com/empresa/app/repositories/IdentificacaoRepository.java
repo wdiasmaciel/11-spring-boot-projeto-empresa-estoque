@@ -7,11 +7,10 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.empresa.app.models.IdentificacaoModel;
-import com.empresa.app.models.ProdutoModel;
 
-public interface IdentificacaoRepository extends JpaRepository<IdentificacaoModel, ProdutoModel> {
+public interface IdentificacaoRepository extends JpaRepository<IdentificacaoModel, UUID> {
     Optional<IdentificacaoModel> findByProdutoModelId(UUID id);
-    Optional<IdentificacaoModel> updateByProdutoModelId(UUID id, IdentificacaoModel identificacaoModel);
+
     void deleteByProdutoModelId(UUID idProduto);
 
     /*

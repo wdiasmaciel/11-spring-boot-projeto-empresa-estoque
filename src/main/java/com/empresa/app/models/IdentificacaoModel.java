@@ -1,14 +1,17 @@
 package com.empresa.app.models;
 
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.JoinColumn;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+
 import lombok.*;
+
+import java.util.UUID;
 
 @Entity
 @Table(name = "identificacao")
@@ -19,26 +22,32 @@ import lombok.*;
 public class IdentificacaoModel {
 
     @Id
+    @EqualsAndHashCode.Include
+    private UUID idProduto;
+
+    
     @MapsId
     /*
      * @MapsId indica que o id do produto é o mesmo que o id da identificação.
-     * Isso significa que a identificação é uma extensão do produto e não tem 
-     * um id separado.
+     * Isso significa que a identificação é uma extensão do produto e não tem
+     * um id separado (relacionamento de composição).
+     * 
      * @MapsId associa um atributo a uma coluna específica.
      * O @MapsId indica que a FK também é a PK.
-     * O @MapsId está criando um relacionamento um-para-um (1:1), compartilhando 
-     * a mesma chave primária, o que é válido em modelagens de composição. 
-     * Nesse caso, a entidade IdentificacaoModel está estendendo ProdutoModel 
-     * em termos de dados, e o @MapsId indica que a FK também é a PK 
+     * O @MapsId está criando um relacionamento um-para-um (1:1), compartilhando
+     * a mesma chave primária, o que é válido em modelagens de composição.
+     * Nesse caso, a entidade IdentificacaoModel está estendendo ProdutoModel
+     * em termos de dados, e o @MapsId indica que a FK também é a PK
      * (uma FK que também é PK).
-     * Isso representa uma relação de composição, onde IdentificacaoModel não 
+     * Isso representa uma relação de composição, onde IdentificacaoModel não
      * existe sem ProdutoModel.
      */
     @OneToOne
-    @JoinColumn(name = "id_produto")
+    @JoinColumn(name = "id_produto", referencedColumnName = "id")
     /*
      * @JoinColumn indica que a coluna id_produto na tabela de Identificacao
      * é uma chave estrangeira que se refere à coluna id da tabela de Produto.
+     * 
      * @JoinColumn é usada para especificar a coluna que será usada para
      * fazer a junção entre as duas tabelas.
      * A @JoinColumn é usada para mapear a relação entre as duas entidades.
@@ -46,25 +55,26 @@ public class IdentificacaoModel {
      * chave estrangeira que se refere à coluna id tabela Produto.
      * A tabela identificacao terá uma coluna chamada id_produto.
      * 
-     * Essa coluna será uma chave estrangeira referenciando o campo id da tabela 
-     * Produto. Com isso, conseguimos fazer o relacionamento @OneToOne (1:1), 
+     * Essa coluna será uma chave estrangeira referenciando o campo id da tabela
+     * Produto. Com isso, conseguimos fazer o relacionamento @OneToOne (1:1),
      * indicando que cada identificação está associada exatamente a um produto.
      * Exemplo:
      * CREATE TABLE identificacao (
-     *     id_produto UUID PRIMARY KEY,
-     *     descricao TEXT NOT NULL,
-     *     observacao TEXT NOT NULL,
-     *     FOREIGN KEY (id_produto) REFERENCES produto(id)
+     *   id_produto UUID PRIMARY KEY,
+     *   descricao TEXT NOT NULL,
+     *   observacao TEXT NOT NULL,
+     *   FOREIGN KEY (id_produto) REFERENCES produto(id)
      * );
-    */
+     */
+    @NotNull
     @Valid
     @EqualsAndHashCode.Include
     private ProdutoModel produtoModel;
-    
+
     @NotNull
     @EqualsAndHashCode.Include
     private String descricao;
-    
+
     @NotNull
     private String observacao;
 }
