@@ -2,6 +2,7 @@ package com.empresa.app.models;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
@@ -23,6 +24,17 @@ public class IdentificacaoModel {
 
     @Id
     @EqualsAndHashCode.Include
+    @Column(name = "id_produto")
+    /*
+     * @Column indica que o campo id_produto na tabela de Identificacao é a
+     * chave primária (PK) e também a chave estrangeira (FK) que se refere à
+     * coluna id da tabela de Produto.
+     * 
+     * @Column é usada para mapear um atributo de uma entidade para uma coluna
+     * específica em uma tabela do banco de dados.
+     * Nesse caso, o campo id_produto é a chave primária da tabela Identificacao,
+     * e também é uma chave estrangeira que referencia a tabela Produto.
+     */
     private UUID id;
 
     
