@@ -22,7 +22,6 @@ public class EstoqueModelPk {
     @NotNull
 	@ManyToOne
     @MapsId("id")
-    @Column(name = "id_produto")
     @JoinColumn(name = "id_produto", referencedColumnName = "id")
     @EqualsAndHashCode.Include
     private UUID id_produto;
@@ -31,7 +30,6 @@ public class EstoqueModelPk {
     @NotBlank
     @ManyToOne
     @MapsId("cnpj")
-    @Column(name = "cnpj_filial")
     @JoinColumn(name = "cnpj_filial", referencedColumnName = "cnpj")
     @EqualsAndHashCode.Include
     private String cnpj_filial;
