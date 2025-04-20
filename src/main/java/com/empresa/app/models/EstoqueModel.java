@@ -14,6 +14,8 @@ import java.time.LocalDate;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "estoque")
 public class EstoqueModel {
 
