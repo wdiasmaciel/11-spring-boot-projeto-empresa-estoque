@@ -2,6 +2,8 @@ package com.empresa.app.mappers;
 
 import com.empresa.app.dtos.EstoqueDto;
 import com.empresa.app.models.EstoqueModelPk;
+import com.empresa.app.models.FilialModel;
+import com.empresa.app.models.ProdutoModel;
 import com.empresa.app.models.EstoqueModel;
 
 public final class EstoqueMapper {
@@ -17,7 +19,7 @@ public final class EstoqueMapper {
                 estoqueDto.getId_produto(),
                 estoqueDto.getCnpj_filial());
         EstoqueModel estoqueModel = new EstoqueModel(
-                estoqueModelPk,
+                estoqueModelPk, 
                 estoqueDto.getPreco(),
                 estoqueDto.getQuantidade(),
                 estoqueDto.getValidade());

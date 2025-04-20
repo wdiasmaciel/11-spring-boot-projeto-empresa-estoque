@@ -17,8 +17,6 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "estoque")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class EstoqueModel {
@@ -48,6 +46,13 @@ public class EstoqueModel {
     @NotNull
     @Column(name = "validade")
     private LocalDate validade;
+
+    public EstoqueModel(EstoqueModelPk estoqueModelPk, double preco, int quantidade, LocalDate validade) {
+        this.id = estoqueModelPk;
+        this.preco = preco;
+        this.quantidade = quantidade;
+        this.validade = validade;
+    }
 
     public void setIdProduto(UUID id_produto) {
         this.id.setId_produto(id_produto);
