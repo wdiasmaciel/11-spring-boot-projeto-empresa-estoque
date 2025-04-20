@@ -66,3 +66,33 @@ INSERT INTO IDENTIFICACAO (id_produto, descricao, observacao) VALUES ('63e7f4d6-
 INSERT INTO IDENTIFICACAO (id_produto, descricao, observacao) VALUES ('eec2d158-c4ff-46c2-9b7f-02d7b26e77c6', 'Descrição do produto 19', 'Observacao do produto 19');
 INSERT INTO IDENTIFICACAO (id_produto, descricao, observacao) VALUES ('967a4c99-0a25-4269-8852-d2d367c25356', 'Descrição do produto 20', 'Observacao do produto 20');
 
+-- Inserindo dados na tabela ESTOQUE:
+INSERT INTO ESTOQUE (id_produto, cnpj_filial, preco, quantidade, validade)
+VALUES ('f8bba9fb-b949-4229-b7b2-2d345bf42ea7', '11.111.111/0001-01', 12.50, 100, '2025-12-31');
+
+INSERT INTO ESTOQUE (id_produto, cnpj_filial, preco, quantidade, validade)
+VALUES ('889affe4-c2df-4139-b947-6bf80f5e1304', '22.222.222/0001-02', 19.90, 50, '2026-01-15');
+
+INSERT INTO ESTOQUE (id_produto, cnpj_filial, preco, quantidade, validade)
+VALUES ('740086f1-bb5f-4f52-9e63-d02ad1e79ac5', '33.333.333/0001-03', 8.75, 200, '2025-10-10');
+
+INSERT INTO ESTOQUE (id_produto, cnpj_filial, preco, quantidade, validade)
+VALUES ('109aeedc-efbc-4589-bc14-4bd6bb0ff0b0', '44.444.444/0001-04', 25.00, 80, '2026-03-30');
+
+INSERT INTO ESTOQUE (id_produto, cnpj_filial, preco, quantidade, validade)
+VALUES ('4fb2bc44-63e7-4daa-99ff-fd04da39a0e5', '55.555.555/0001-05', 15.20, 120, '2025-11-20');
+
+INSERT INTO ESTOQUE (id_produto, cnpj_filial, preco, quantidade, validade)
+VALUES ('4d1a5f0e-9f08-4816-93b2-552abb90c415', '11.111.111/0001-01', 13.60, 90, '2026-02-15');
+
+INSERT INTO ESTOQUE (id_produto, cnpj_filial, preco, quantidade, validade)
+VALUES ('f47ed78d-5303-4539-bf21-0c0e04f505a3', '22.222.222/0001-02', 17.40, 70, '2026-06-01');
+
+INSERT INTO ESTOQUE (id_produto, cnpj_filial, preco, quantidade, validade)
+VALUES ('caa98c62-2e52-41a0-8442-e2c35c4fdffd', '33.333.333/0001-03', 11.90, 110, '2025-09-01');
+
+INSERT INTO ESTOQUE (id_produto, cnpj_filial, preco, quantidade, validade)
+VALUES ('aa99825f-2f0b-48fc-a987-7682f69ffcc7', '44.444.444/0001-04', 22.80, 60, '2026-05-25');
+
+INSERT INTO ESTOQUE (id_produto, cnpj_filial, preco, quantidade, validade)
+VALUES ('ac178376-193c-41d8-91c1-80c3fe7a1fcf', '55.555.555/0001-05', 18.30, 140, '2025-08-18');
