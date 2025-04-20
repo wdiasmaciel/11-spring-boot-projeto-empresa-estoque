@@ -21,8 +21,8 @@ public class EstoqueController {
         return estoqueService.findAll();
     }
 
-    @GetMapping(value = "/{id}/{cnpj}")
-    public EstoqueDto findById(@PathVariable UUID id, @PathVariable String cnpj) {
+    @GetMapping
+    public EstoqueDto findByIdCnpj(@RequestParam UUID id, @RequestParam String cnpj) {
         return estoqueService.findById_produdtoCnpj_filial(id, cnpj);
     }
 
@@ -31,14 +31,16 @@ public class EstoqueController {
         return estoqueService.save(estoqueDto);
     }
 
-    @PutMapping("/{id}/{cnpj}")
-    public EstoqueDto update(@PathVariable UUID id, @PathVariable String cnpj,
+    @PutMapping
+    public EstoqueDto update(
+            @RequestParam UUID id,
+            @RequestParam String cnpj,
             @RequestBody @Valid EstoqueDto estoqueDtoComAtualizacao) {
         return estoqueService.update(id, cnpj, estoqueDtoComAtualizacao);
     }
 
-    @DeleteMapping("/{id}/{cnpj}")
-    public void delete(@PathVariable UUID id, @PathVariable String cnpj) {
+    @DeleteMapping
+    public void delete(@RequestParam UUID id, @RequestParam String cnpj) {
         estoqueService.delete(id, cnpj);
     }
 }
