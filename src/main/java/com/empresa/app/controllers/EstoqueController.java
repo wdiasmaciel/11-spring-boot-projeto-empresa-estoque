@@ -21,7 +21,7 @@ public class EstoqueController {
         return estoqueService.findAll();
     }
 
-    @GetMapping(params = { "id", "cnpj" })
+    @GetMapping("/idcnpj")
     public EstoqueDto findByIdCnpj(@RequestParam UUID id, @RequestParam String cnpj) {
         return estoqueService.findById_produdtoCnpj_filial(id, cnpj);
     }
