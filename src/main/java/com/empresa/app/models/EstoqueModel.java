@@ -3,6 +3,9 @@ package com.empresa.app.models;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 
 import jakarta.validation.constraints.NotNull;
@@ -17,10 +20,22 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "estoque")
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class EstoqueModel {
 
     @EmbeddedId
+    @EqualsAndHashCode.Include
     private EstoqueModelPk id = new EstoqueModelPk();
+
+    @ManyToOne
+    @MapsId("id_produto")
+    @JoinColumn(name = "id_produto", referencedColumnName = "id")
+    private UUID id_produto;
+
+    @ManyToOne
+    @MapsId("cnpj_filial")
+    @JoinColumn(name = "cnpj_filial", referencedColumnName = "cnpj")
+    private String cnpj_filial;
 
     @NotNull
     @Column(name = "preco")
