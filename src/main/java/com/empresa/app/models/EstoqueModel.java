@@ -30,12 +30,12 @@ public class EstoqueModel {
     @ManyToOne
     @MapsId("id_produto")
     @JoinColumn(name = "id_produto", referencedColumnName = "id")
-    private UUID id_produto;
+    private ProdutoModel produtoModel;
 
     @ManyToOne
     @MapsId("cnpj_filial")
     @JoinColumn(name = "cnpj_filial", referencedColumnName = "cnpj")
-    private String cnpj_filial;
+    private FilialModel filialModel;
 
     @NotNull
     @Column(name = "preco")
