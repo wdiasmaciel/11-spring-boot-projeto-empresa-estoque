@@ -18,6 +18,7 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "estoque")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class EstoqueModel {

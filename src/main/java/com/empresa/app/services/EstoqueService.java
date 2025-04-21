@@ -13,14 +13,24 @@ import com.empresa.app.models.EstoqueModel;
 import com.empresa.app.models.EstoqueModelPk;
 import com.empresa.app.mappers.EstoqueMapper;
 import com.empresa.app.repositories.EstoqueRepository;
+import com.empresa.app.repositories.ProdutoRepository;
+import com.empresa.app.repositories.FilialRepository;
 
 @Service
 public class EstoqueService {
 
     @Autowired
+    private final ProdutoRepository produtoRepository;
+    
+    @Autowired
+    private final FilialRepository filialRepository;
+    
+    @Autowired
     private final EstoqueRepository estoqueRepository;
 
-    public EstoqueService(EstoqueRepository estoqueRepository) {
+    public EstoqueService(ProdutoRepository produtoRepository, FilialRepository filialRepository, EstoqueRepository estoqueRepository) {
+        this.produtoRepository = produtoRepository;
+        this.filialRepository = filialRepository;
         this.estoqueRepository = estoqueRepository;
     }
 
@@ -34,10 +44,11 @@ public class EstoqueService {
     }
 
     @Transactional(readOnly = true)
-    public EstoqueDto findById_produdtoCnpj_filial(UUID id_produto, String cnpj_filial) {
+    public EstoqueDto findById_produdtoAndCnpj_filial(UUID id_produto, String cnpj_filial) {
         EstoqueModelPk estoqueModelPk = new EstoqueModelPk(id_produto, cnpj_filial);
         return estoqueRepository.findById(estoqueModelPk) // Retorna um Optional<EstoqueModel>.
-                .map(EstoqueMapper::toDto) // Converte o EstoqueModel para EstoqueDto apenas se o valor estiver presente.
+                .map(EstoqueMapper::toDto) // Converte o EstoqueModel para EstoqueDto apenas se o valor estiver
+                                           // presente.
                                            // EstoqueMapper::toDto é uma "method reference".
                 .orElse(null); // Retorna null se o Optional estiver vazio (ou seja, se não encontrou o
                                // estoque).
@@ -45,7 +56,8 @@ public class EstoqueService {
 
     @Transactional
     public EstoqueDto save(EstoqueDto estoqueDto) {
-        EstoqueModel estoqueModel = estoqueRepository.save(EstoqueMapper.toModel(estoqueDto));
+        EstoqueModel estoqueModel = estoqueRepository
+                .save(EstoqueMapper.toModel(produtoRepository, filialRepository, estoqueDto));
         return EstoqueMapper.toDto(estoqueModel);
     }
 
@@ -54,10 +66,13 @@ public class EstoqueService {
         EstoqueModelPk estoqueModelPk = new EstoqueModelPk(id_produto, cnpj_filial);
         EstoqueModel estoqueModel = estoqueRepository.findById(estoqueModelPk).orElse(null);
         if (estoqueModel != null) {
-            // Copia as propriedades de estoqueDtoComAtualizacao para estoqueModel, exceto as
-            // propriedades "id_produto" e "cnpj_filial". Isso é útil para evitar que o id_produto e o cnpj_filial sejam sobrescritos.
-            BeanUtils.copyProperties(estoqueDtoComAtualizacao, estoqueModel, "id_produto", "cnpj_filial");
-            // Salva a filialModel atualizada, converte para FilialDto e retorna a FilialDto.
+            // Copia as propriedades de estoqueDtoComAtualizacao para estoqueModel, exceto
+            // as
+            // propriedades "id_produto" e "cnpj_filial". Isso é útil para evitar que o
+            // id_produto e o cnpj_filial sejam sobrescritos.
+            BeanUtils.copyProperties(estoqueDtoComAtualizacao, estoqueModel, "id", "produtoModel", "filialModel");
+            // Salva a filialModel atualizada, converte para FilialDto e retorna a
+            // FilialDto.
             return EstoqueMapper.toDto(estoqueRepository.save(estoqueModel));
         }
         return null;

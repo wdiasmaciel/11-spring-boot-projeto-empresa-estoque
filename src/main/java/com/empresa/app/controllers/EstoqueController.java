@@ -23,7 +23,7 @@ public class EstoqueController {
 
     @GetMapping("/idcnpj")
     public EstoqueDto findByIdCnpj(@RequestParam UUID id, @RequestParam String cnpj) {
-        return estoqueService.findById_produdtoCnpj_filial(id, cnpj);
+        return estoqueService.findById_produdtoAndCnpj_filial(id, cnpj);
     }
 
     @PostMapping
